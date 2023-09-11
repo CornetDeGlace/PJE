@@ -20,6 +20,7 @@ def convert_csv_to_list(liste_a_modifier):
                 liste_a_modifier.append(line)
     if liste_a_modifier != []:
         bouton_analyser.config(state="normal")
+    print(nettoyage(liste_test))
 
 def analyse():
     pass
@@ -36,7 +37,7 @@ def on_selection(event):
         if algo["name"] == algo_name:
             description_algo.config(text=algo["description"])
             
-print(nettoyage(liste_test))
+
 
 main_window = tk.Tk()
 main_window.title("Interface Graphique")
