@@ -48,8 +48,6 @@ bouton_analyser.pack()
 resultat = tk.Label(main_window, text="Résultat : RIEN POUR L'INSTANT")
 resultat.pack(padx=20, pady=20)
 
-# Lier la fonction à l'événement de changement de sélection de la combobox
 selection_algo.bind("<<ComboboxSelected>>", on_selection)
-
 
 main_window.mainloop()
