@@ -24,7 +24,7 @@ def convert_csv_to_list(liste_a_modifier):
 def analyse():
     pass
 
-def nettoyag(csv_list):
+def nettoyage(csv_list):
     commentaires = []
     for line in csv_list:
         commentaires.append(line[5])
@@ -35,6 +35,8 @@ def on_selection(event):
     for algo in algorithmes:
         if algo["name"] == algo_name:
             description_algo.config(text=algo["description"])
+            
+print(nettoyage(liste_test))
 
 main_window = tk.Tk()
 main_window.title("Interface Graphique")
