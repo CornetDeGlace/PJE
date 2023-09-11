@@ -2,11 +2,11 @@ import tkinter as tk
 from tkinter import filedialog
 import csv
 from tkinter import ttk
+import re
 
 liste_apprentissage = []
 liste_test = []
 algorithmes = [{"name" : "Dictionnaire", "description" : "blabla sur dictionnaire"}, {"name" : "KNN", "description" : "blaba de KNN"}, {"name" : "Bayes", "description" : "blabla sur Bayes"}]
-
 
 def quit():
     main_window.destroy()
@@ -20,24 +20,31 @@ def convert_csv_to_list(liste_a_modifier):
                 liste_a_modifier.append(line)
     if liste_a_modifier != []:
         bouton_analyser.config(state="normal")
-    print(nettoyage(liste_test))
+        afficher_tweets_importes()  # Affiche les tweets importés après importation
 
 def analyse():
     pass
 
 def nettoyage(csv_list):
-    commentaires = []
+    commentaires_nettoyes = []
     for line in csv_list:
-        commentaires.append(line[5])
-    return commentaires
+        commentaire = line[5]  # Supposons que le commentaire est dans la sixième colonne.
+        commentaire_nettoye = re.sub(r'@.*?-', '', commentaire)
+        commentaires_nettoyes.append(commentaire_nettoye)
+    return commentaires_nettoyes
 
 def on_selection(event):
     algo_name = selection_algo.get()
     for algo in algorithmes:
         if algo["name"] == algo_name:
             description_algo.config(text=algo["description"])
-            
 
+def afficher_tweets_importes():
+    text_area.delete(1.0, tk.END)  # Efface le contenu précédent du Text widget
+    for ligne in liste_test:
+        commentaire = ligne[5]  # Supposons que le commentaire est dans la sixième colonne.
+        commentaire_nettoye = re.sub(r'@.*?-', '', commentaire)
+        text_area.insert(tk.END, commentaire_nettoye + "\n")  # Ajoute le commentaire nettoyé avec un saut de ligne
 
 main_window = tk.Tk()
 main_window.title("Interface Graphique")
@@ -55,11 +62,13 @@ bouton_import.pack()
 bouton_import = tk.Button(main_window, text="Import fichier de test", command=lambda: convert_csv_to_list(liste_test))
 bouton_import.pack(padx=20, pady=20)
 
-bouton_analyser = tk.Button(main_window, text="Analyser avec IA", command=analyse, state="disabled")
-bouton_analyser.pack()
+# Créez un widget Text pour afficher les tweets
+text_area = tk.Text(main_window, wrap=tk.WORD, width=40, height=10)
+text_area.pack(padx=20, pady=20)
 
-bouton_analyser = tk.Button(main_window, text="Afficher le résultat", command=analyse, state="disabled")
-bouton_analyser.pack()
+# Bouton pour afficher le résultat
+bouton_afficher_resultat = tk.Button(main_window, text="Afficher le résultat", command=afficher_tweets_importes, state="disabled")
+bouton_afficher_resultat.pack()
 
 resultat = tk.Label(main_window, text="Résultat : RIEN POUR L'INSTANT")
 resultat.pack(padx=20, pady=20)
