@@ -49,6 +49,10 @@ def afficher_tweets_importes():
         commentaire_nettoye = nettoyage(commentaire)
         text_area.insert(tk.END, commentaire_nettoye + "\n")  # Ajoute le commentaire nettoyé avec un saut de ligne
 
+def analyser_tweets():
+    # Mettez ici le code pour analyser les tweets si nécessaire
+    pass
+
 main_window = tk.Tk()
 main_window.title("Interface Graphique")
 
@@ -68,6 +72,10 @@ bouton_import.pack(padx=20, pady=20)
 # Créez un widget Text pour afficher les tweets
 text_area = tk.Text(main_window, wrap=tk.WORD, width=40, height=10)
 text_area.pack(padx=20, pady=20)
+
+# Bouton pour analyser les tweets
+bouton_analyser_tweets = tk.Button(main_window, text="Analyser les tweets", command=analyser_tweets, state="disabled")
+bouton_analyser_tweets.pack()
 
 # Bouton pour afficher le résultat
 bouton_afficher_resultat = tk.Button(main_window, text="Afficher le résultat", command=afficher_tweets_importes, state="disabled")
