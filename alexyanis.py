@@ -25,16 +25,16 @@ def convert_csv_to_list(liste_a_modifier):
 def analyse():
     pass
 
-def nettoyage(csv_list):
-    commentaires_nettoyes = []
-    for line in csv_list:
-        commentaire = line[5]  # Supposons que le commentaire est dans la sixième colonne.
-        commentaire_nettoye = re.sub(r'@.*?-', '', commentaire)  # Supprimer @username
-        commentaire_nettoye = re.sub(r'([!?":;,])', r' \1 ', commentaire_nettoye)  # Ajouter des espaces autour de ! ? : . " ; ,
-        commentaire_nettoye = re.sub(r'(\$\d+(\.\d+)?)', '$XX', commentaire_nettoye)  # Remplacer les valeurs en dollars par $XX
-        commentaire_nettoye = re.sub(r'(\d+% )', 'XX%', commentaire_nettoye)  # Remplacer les valeurs en pourcentage par XX%
-        commentaires_nettoyes.append(commentaire_nettoye)
-    return commentaires_nettoyes
+def nettoyage(commentaire):
+    # #1, Replace @username with @
+    commentaire_nettoye = re.sub(r'(@[a-zA-Z0-9]+)', '@', commentaire)
+    # #2, Add white space character before and after ! ? : . " ; ,
+    commentaire_nettoye = re.sub(r'([!?":;,])', r' \1 ', commentaire_nettoye)
+    # #3, Replace dollar values with variable ( $14.99 => $XX) (idem euros)
+    commentaire_nettoye = re.sub(r'(\$ ?\d+\.\d+)', '$XX', commentaire_nettoye)
+    # #4, Replace percentage values with variable (25n% => XXn%)
+    commentaire_nettoye = re.sub(r'([0-9]{1,2}\%)', 'XX%', commentaire_nettoye)
+    return commentaire_nettoye
 
 def on_selection(event):
     algo_name = selection_algo.get()
@@ -46,7 +46,7 @@ def afficher_tweets_importes():
     text_area.delete(1.0, tk.END)  # Efface le contenu précédent du Text widget
     for ligne in liste_test:
         commentaire = ligne[5]  # Supposons que le commentaire est dans la sixième colonne.
-        commentaire_nettoye = re.sub(r'@.*?-', '', commentaire)
+        commentaire_nettoye = nettoyage(commentaire)
         text_area.insert(tk.END, commentaire_nettoye + "\n")  # Ajoute le commentaire nettoyé avec un saut de ligne
 
 main_window = tk.Tk()
