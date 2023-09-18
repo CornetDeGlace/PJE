@@ -77,6 +77,10 @@ text_area.pack(padx=20, pady=20)
 bouton_analyser_tweets = tk.Button(main_window, text="Analyser les tweets", command=analyser_tweets, state="disabled")
 bouton_analyser_tweets.pack()
 
+# Espace entre les deux boutons
+espace_entre_boutons = tk.Label(main_window, text="", height=1)
+espace_entre_boutons.pack()
+
 # Bouton pour afficher le résultat
 bouton_afficher_resultat = tk.Button(main_window, text="Afficher le résultat", command=afficher_tweets_importes, state="disabled")
 bouton_afficher_resultat.pack()
