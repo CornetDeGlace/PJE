@@ -51,15 +51,12 @@ def afficher_tweets_importes():
         commentaire_nettoye = nettoyage(commentaire)
         text_area.insert(tk.END, commentaire_nettoye + "\n")  # Ajoute le commentaire nettoyé avec un saut de ligne
 
-<<<<<<< HEAD
 def analyser_tweets():
     # Mettez ici le code pour analyser les tweets si nécessaire
     pass
-=======
 def update_evaluation(*args):
     new_value = combo_var.get()
     liste_test[0] = new_value
->>>>>>> testBranche
 
 main_window = tk.Tk()
 main_window.title("Interface Graphique")
@@ -81,7 +78,6 @@ bouton_import.pack(padx=20, pady=20)
 text_area = tk.Text(main_window, wrap=tk.WORD, width=40, height=10)
 text_area.pack(padx=20, pady=20)
 
-<<<<<<< HEAD
 # Bouton pour analyser les tweets
 bouton_analyser_tweets = tk.Button(main_window, text="Analyser les tweets", command=analyser_tweets, state="disabled")
 bouton_analyser_tweets.pack()
@@ -89,7 +85,6 @@ bouton_analyser_tweets.pack()
 # Espace entre les deux boutons
 espace_entre_boutons = tk.Label(main_window, text="", height=1)
 espace_entre_boutons.pack()
-=======
 label = tk.Label(main_window, text=listeTest[5])
 label.pack(padx=10, pady=10)
 # Créer une liste déroulante pour modifier le premier élément
@@ -100,7 +95,6 @@ combo.pack(padx=10, pady=10)
 
 # Associer la fonction de mise à jour à la liste déroulante
 combo_var.trace_add("write", update_evaluation)
->>>>>>> testBranche
 
 # Bouton pour afficher le résultat
 bouton_afficher_resultat = tk.Button(main_window, text="Afficher le résultat", command=afficher_tweets_importes, state="disabled")
