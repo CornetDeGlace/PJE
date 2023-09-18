@@ -40,6 +40,8 @@ def nettoyage(commentaire):
     commentaire_nettoye = re.sub(r'(\$ ?\d+\.\d+)', '$XX', commentaire_nettoye)
     # #4, Replace percentage values with variable (25n% => XXn%)
     commentaire_nettoye = re.sub(r'([0-9]{1,2}\%)', 'XX%', commentaire_nettoye)
+    # #5, Replace all links with void chain
+    commentaire_nettoye = re.sub(r'https?://\S+|www\.\S+', '', commentaire_nettoye)
     return commentaire_nettoye
 
 def on_selection(event):
