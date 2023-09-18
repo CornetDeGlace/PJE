@@ -3,6 +3,10 @@ from tkinter import filedialog
 import csv
 from tkinter import ttk
 import re
+import Dictionnaire
+import KNN
+import Bayes
+
 
 listeTest = ['4', '3', 'Mon May 11 03:17:40 UTC 2009', 'kindle2', 'tpryan', '@stellargirl I loooooooovvvvvveee my Kindle2. Not that the DX is cool, but the 2 is fantastic in its own right.']
 
@@ -52,8 +56,26 @@ def afficher_tweets_importes():
         text_area.insert(tk.END, commentaire_nettoye + "\n")  # Ajoute le commentaire nettoyé avec un saut de ligne
 
 def analyser_tweets():
-    # Mettez ici le code pour analyser les tweets si nécessaire
-    pass
+    # Récupérer le nom de l'algorithme sélectionné
+    algo_name = selection_algo.get()
+    
+    # Afficher le nom de l'algorithme dans le terminal
+    print(f"Algorithme sélectionné : {algo_name}")
+    
+    if algo_name == "Dictionnaire":
+        # Appeler la fonction de l'algorithme de Dictionnaire
+        Dictionnaire.analyser_tweets(liste_test)
+    elif algo_name == "KNN":
+        # Appeler la fonction de l'algorithme de KNN
+        KNN.analyser_tweets(liste_test)
+    elif algo_name == "Bayes":
+        # Appeler la fonction de l'algorithme de Bayes
+        Bayes.analyser_tweets(liste_test)
+    else:
+        # Gérer une sélection invalide (facultatif)
+        print("Algorithme non pris en charge")
+
+
 def update_evaluation(*args):
     new_value = combo_var.get()
     liste_test[0] = new_value
