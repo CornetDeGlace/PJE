@@ -29,7 +29,10 @@ def nettoyage(csv_list):
     commentaires_nettoyes = []
     for line in csv_list:
         commentaire = line[5]  # Supposons que le commentaire est dans la sixième colonne.
-        commentaire_nettoye = re.sub(r'@.*?-', '', commentaire)
+        commentaire_nettoye = re.sub(r'@.*?-', '', commentaire)  # Supprimer @username
+        commentaire_nettoye = re.sub(r'([!?":;,])', r' \1 ', commentaire_nettoye)  # Ajouter des espaces autour de ! ? : . " ; ,
+        commentaire_nettoye = re.sub(r'(\$\d+(\.\d+)?)', '$XX', commentaire_nettoye)  # Remplacer les valeurs en dollars par $XX
+        commentaire_nettoye = re.sub(r'(\d+% )', 'XX%', commentaire_nettoye)  # Remplacer les valeurs en pourcentage par XX%
         commentaires_nettoyes.append(commentaire_nettoye)
     return commentaires_nettoyes
 
