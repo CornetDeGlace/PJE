@@ -34,7 +34,6 @@ def convert_csv_to_list(liste_a_modifier):
 def sauvegarder_textes_nettoyes():
     # Récupérer les textes nettoyés de la liste d'apprentissage
     textes_nettoyes = [nettoyage(ligne[5]) for ligne in liste_apprentissage]
-    
     # Écrire les textes nettoyés dans un fichier texte
     with open("textes_nettoyes.txt", "w", encoding="utf-8") as fichier:
         for texte in textes_nettoyes:
