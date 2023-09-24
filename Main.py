@@ -62,7 +62,7 @@ def on_selection(event):
 
 def afficher_tweets_importes():
     for item in liste_test:
-        listbox.insert(tk.END, f"{item[5]} : {item[0]}")
+        listbox.insert(tk.END, f"{item[0]} -> {item[5]}")
     # text_area.delete(1.0, tk.END)
     # for ligne in liste_test:
     #     commentaire = ligne[5]
@@ -107,7 +107,7 @@ def edit_item():
             index = selected_index[0]
             liste_test[index][0] = new_value
             listbox.delete(index)
-            listbox.insert(index, f"{liste_test[index][5]}, {new_value}")
+            listbox.insert(index, f"{new_value} -> {liste_test[index][5]}")
             print(liste_test)
 
 main_window = tk.Tk()
@@ -180,12 +180,9 @@ scrolling_area.bind("<Configure>", on_canvas_configure)
 #     button.pack()
 
 # Créez une Listbox pour afficher les deux éléments de chaque sous-liste
-listbox = tk.Listbox(scrolling_area)
+listbox = tk.Listbox(scrolling_area, width=40)
 listbox.pack()
 
-# Ajoutez les éléments de la liste initiale à la Listbox
-for item in liste_test:
-    listbox.insert(tk.END, f"{item[5]} : {item[0]}")
 
 # Créez une liste déroulante (combobox) pour les choix possibles
 choices = [-1, 0, 1, 2, 3, 4]
