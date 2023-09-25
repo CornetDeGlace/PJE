@@ -1,18 +1,13 @@
 class Dictionnaire:
     def __init__(self):
-        self.positive_list = []
-        self.negative_list = []
-        self.negative_list = mots_depuis_fichier("data/negative.txt")
-        self.positive_list = mots_depuis_fichier("data/positive.txt")
+        self.negative_list = self.mots_depuis_fichier("data/negative.txt")
+        self.positive_list = self.mots_depuis_fichier("data/positive.txt")
 
     def analyser_tweets(self, liste_test_file):
         compteur_positive = 0
         compteur_negative = 0
         liste_test_analyse = []
         for tweet in liste_test_file:
-            print("caca")
-            print(tweet)
-            print(tweet[5])
             for mot in tweet[5].split():
                 print(mot)
                 if mot in self.positive_list:
@@ -29,21 +24,13 @@ class Dictionnaire:
             compteur_negative = 0
         return liste_test_analyse
 
-def mots_depuis_fichier(nom_fichier):
-    try:
-        # Ouvrir le fichier en mode lecture avec l'encodage UTF-8
-        with open(nom_fichier, 'r', encoding='utf-8') as fichier:
-            # Lire le contenu du fichier et le diviser en mots à chaque virgule
-            contenu = fichier.read()
-            mots = contenu.split(',')
-            
-            # Supprimer les espaces blancs autour de chaque mot
-            mots_propres = [mot.strip() for mot in mots if mot.strip()]
-            
-            return mots_propres
-    except FileNotFoundError:
-        print(f"Le fichier '{nom_fichier}' n'a pas été trouvé.")
-        return []
-
-# Exemple d'utilisation
-dictionnaire = Dictionnaire()
+    def mots_depuis_fichier(nom_fichier):
+        try:
+            with open(nom_fichier, 'r', encoding='utf-8') as fichier:
+                contenu = fichier.read()
+                mots = contenu.split(',')
+                mots_propres = [mot.strip() for mot in mots if mot.strip()]
+                return mots_propres
+        except FileNotFoundError:
+            print(f"Le fichier '{nom_fichier}' n'a pas été trouvé.")
+            return []

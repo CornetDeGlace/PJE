@@ -73,7 +73,7 @@ def analyser_tweets():
     if algo_name == "Dictionnaire":
         # Appeler la fonction de l'algorithme de Dictionnaire
         dictionnaire = Dictionnaire.Dictionnaire()
-        liste_test_file_dictionnaire = [tweet[:4] + [nettoyage(tweet[5])] + tweet[5:6] for tweet in liste_test_file]
+        liste_test_file_dictionnaire = [tweet[:5] + [nettoyage(tweet[5])] + tweet[5:5] for tweet in liste_test_file]
         liste_test_analyse = dictionnaire.analyser_tweets(liste_test_file_dictionnaire)
         print("résultat : ")
         print(liste_test_analyse)
