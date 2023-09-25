@@ -46,7 +46,7 @@ def analyse():
 
 def nettoyage(commentaire):
     commentaire_nettoye = re.sub(r'(@[a-zA-Z0-9]+)', '@', commentaire)
-    commentaire_nettoye = re.sub(r'([!?":;,])', r' \1 ', commentaire_nettoye)
+    commentaire_nettoye = re.sub(r'([!?".:;,])', r' \1 ', commentaire_nettoye)
     commentaire_nettoye = re.sub(r'(\$ ?\d+\.\d+)', '$XX', commentaire_nettoye)
     commentaire_nettoye = re.sub(r'([0-9]{1,2}\%)', 'XX%', commentaire_nettoye)
     # #5, Replace all links with void chain
