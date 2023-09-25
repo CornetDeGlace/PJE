@@ -12,9 +12,9 @@ elements_tests = [["blabla1", 1], ["blabla2", 2], ["blabla3", 3], ["blabla4", 4]
 liste_apprentissage = []
 liste_test = []
 algorithmes = [
-    {"name": "Dictionnaire", "description": "blabla sur dictionnaire"},
-    {"name": "KNN", "description": "blabla de KNN"},
-    {"name": "Bayes", "description": "blabla sur Bayes"}
+    {"name": "Dictionnaire", "description": "Algorithme Dictionnaire"},
+    {"name": "KNN", "description": "Algorithme KNN"},
+    {"name": "Bayes", "description": "Algorithme Bayes"}
 ]
 
 def quit():
@@ -112,6 +112,7 @@ def edit_item():
 
 main_window = tk.Tk()
 main_window.title("Interface Graphique")
+main_window.geometry("600x600")
 
 # Liste algorithmes
 selection_algo = ttk.Combobox(main_window, values=[algo["name"] for algo in algorithmes], state="readonly")
@@ -130,9 +131,7 @@ bouton_import_apprentissage.pack()
 espace_entre_boutons = tk.Label(main_window, text="", height=1)
 espace_entre_boutons.pack()
 
-# Bouton "Sauvegarder" pour sauvegarder les textes nettoyés
-bouton_sauvegarder = tk.Button(main_window, text="Sauvegarder", state="disabled", command=sauvegarder_textes_nettoyes)
-bouton_sauvegarder.pack()
+
 
 # Bouton d'import du fichier test
 bouton_import_test = tk.Button(main_window, text="Importer fichier de test", command=lambda: convert_csv_to_list(liste_test))
@@ -162,38 +161,30 @@ resultat.pack(padx=20, pady=20)
 
 selection_algo.bind("<<ComboboxSelected>>", on_selection)
 
-# Zone de texte test
-scrolling_area = tk.Canvas(main_window)
-scrolling_area.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-scrolling_frame = tk.Frame(scrolling_area)
-
-scrolling_area.create_window((0, 0), window=scrolling_frame, anchor=tk.NW)
-scrollbar = tk.Scrollbar(main_window, command=scrolling_area.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-scrolling_area.config(yscrollcommand=scrollbar.set)
-def on_canvas_configure(event):
-    scrolling_area.configure(scrollregion=scrolling_area.bbox("all"))
-
-scrolling_area.bind("<Configure>", on_canvas_configure)
-# for i in range(20):
-#     button = tk.Button(scrolling_frame, text=f"Bouton {i + 1}")
-#     button.pack()
 
 # Créez une Listbox pour afficher les deux éléments de chaque sous-liste
-listbox = tk.Listbox(scrolling_area, width=40)
+listbox = tk.Listbox(main_window, width=100)
 listbox.pack()
 
 
-# Créez une liste déroulante (combobox) pour les choix possibles
-choices = [-1, 0, 1, 2, 3, 4]
-combobox = ttk.Combobox(scrolling_area, values=choices)
+# Créez une liste déroulante (combobox) pour les choix possibles de notes
+choices = [-1, 0, 2, 4]
+combobox = ttk.Combobox(main_window, values=choices)
 combobox.pack()
 
 # Par défaut, sélectionnez le premier élément de la liste déroulante
 combobox.set(choices[0])
 
 # Créez un bouton pour éditer des éléments
-edit_button = tk.Button(scrolling_area, text="Éditer", command=edit_item)
+edit_button = tk.Button(main_window, text="Éditer", command=edit_item)
 edit_button.pack()
+
+# Créez un espace visuel entre les boutons
+espace_entre_boutons = tk.Label(main_window, text="", height=1)
+espace_entre_boutons.pack()
+
+# Bouton "Sauvegarder" pour sauvegarder les textes nettoyés
+bouton_sauvegarder = tk.Button(main_window, text="Sauvegarder", state="disabled", command=sauvegarder_textes_nettoyes)
+bouton_sauvegarder.pack()
 
 main_window.mainloop()
