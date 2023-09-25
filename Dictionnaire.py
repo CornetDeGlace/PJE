@@ -8,7 +8,6 @@ class Dictionnaire:
         print(self.negative_list)
         print(self.positive_list)
 
-
     def analyser_tweets(self, liste_test_file):
         compteur_positive = 0
         compteur_negative = 0
@@ -28,13 +27,11 @@ class Dictionnaire:
             compteur_positive = 0
             compteur_negative = 0
         return liste_test_analyse
-    
-
 
 def mots_depuis_fichier(nom_fichier):
     try:
-        # Ouvrir le fichier en mode lecture
-        with open(nom_fichier, 'r') as fichier:
+        # Ouvrir le fichier en mode lecture avec l'encodage UTF-8
+        with open(nom_fichier, 'r', encoding='utf-8') as fichier:
             # Lire le contenu du fichier et le diviser en mots à chaque virgule
             contenu = fichier.read()
             mots = contenu.split(',')
@@ -47,3 +44,5 @@ def mots_depuis_fichier(nom_fichier):
         print(f"Le fichier '{nom_fichier}' n'a pas été trouvé.")
         return []
 
+# Exemple d'utilisation
+dictionnaire = Dictionnaire()
