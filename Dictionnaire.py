@@ -24,7 +24,7 @@ class Dictionnaire:
             compteur_negative = 0
         return liste_test_analyse
 
-    def mots_depuis_fichier(nom_fichier):
+    def mots_depuis_fichier(self, nom_fichier):
         try:
             with open(nom_fichier, 'r', encoding='utf-8') as fichier:
                 contenu = fichier.read()
