@@ -7,10 +7,9 @@ import Dictionnaire
 import KNN
 import Bayes
 
-elements_tests = [["blabla1", 1], ["blabla2", 2], ["blabla3", 3], ["blabla4", 4]]
-
 liste_apprentissage = []
-liste_test = []
+liste_test_file = []
+liste_test_analyse = []
 algorithmes = [
     {"name": "Dictionnaire", "description": "Algorithme Dictionnaire"},
     {"name": "KNN", "description": "Algorithme KNN"},
@@ -32,7 +31,7 @@ def convert_csv_to_list(liste_a_modifier):
         bouton_sauvegarder.config(state="normal")  # Activer le bouton "Sauvegarder"
         afficher_tweets_importes()
 
-    print(liste_test)
+    print(liste_test_file)
 
 def sauvegarder_textes_nettoyes():
     # Récupérer les textes nettoyés de la liste d'apprentissage
@@ -61,13 +60,8 @@ def on_selection(event):
             description_algo.config(text=algo["description"])
 
 def afficher_tweets_importes():
-    for item in liste_test:
+    for item in liste_test_file:
         listbox.insert(tk.END, f"{item[0]} -> {item[5]}")
-    # text_area.delete(1.0, tk.END)
-    # for ligne in liste_test:
-    #     commentaire = ligne[5]
-    #     commentaire_nettoye = nettoyage(commentaire)
-    #     text_area.insert(tk.END, commentaire_nettoye + "\n")
 
 def analyser_tweets():
     # Récupérer le nom de l'algorithme sélectionné
@@ -78,25 +72,19 @@ def analyser_tweets():
     
     if algo_name == "Dictionnaire":
         # Appeler la fonction de l'algorithme de Dictionnaire
-        Dictionnaire.analyser_tweets(liste_test)
+        dictionnaire = Dictionnaire.Dictionnaire()
+        dictionnaire.analyser_tweets()
     elif algo_name == "KNN":
         # Appeler la fonction de l'algorithme de KNN
-        KNN.analyser_tweets(liste_test)
+        knn = KNN.KNN()
+        knn.analyser_tweets()
     elif algo_name == "Bayes":
         # Appeler la fonction de l'algorithme de Bayes
-        Bayes.analyser_tweets(liste_test)
+        bayes = Bayes.Bayes()
+        bayes.analyser_tweets()
     else:
         # Gérer une sélection invalide (facultatif)
         print("Algorithme non pris en charge")
-
-# def update_evaluation(*args):
-#     new_value = combo_var.get()
-#     liste_test[0] = new_value
-#     for ligne in liste_test:
-#         classification = classification_var.get()
-#         algorithme = selection_algo.get()
-#         # Insérez votre logique d'analyse ici et affichez le résultat dans le Text widget
-#         pass
 
 def edit_item():
     selected_index = listbox.curselection()
@@ -105,10 +93,10 @@ def edit_item():
         if new_value:
             new_value = int(new_value)
             index = selected_index[0]
-            liste_test[index][0] = new_value
+            liste_test_file[index][0] = new_value
             listbox.delete(index)
-            listbox.insert(index, f"{new_value} -> {liste_test[index][5]}")
-            print(liste_test)
+            listbox.insert(index, f"{new_value} -> {liste_test_file[index][5]}")
+            print(liste_test_file)
 
 main_window = tk.Tk()
 main_window.title("Interface Graphique")
@@ -131,27 +119,15 @@ bouton_import_apprentissage.pack()
 espace_entre_boutons = tk.Label(main_window, text="", height=1)
 espace_entre_boutons.pack()
 
-
-
 # Bouton d'import du fichier test
-bouton_import_test = tk.Button(main_window, text="Importer fichier de test", command=lambda: convert_csv_to_list(liste_test))
+bouton_import_test = tk.Button(main_window, text="Importer fichier de test", command=lambda: convert_csv_to_list(liste_test_file))
 bouton_import_test.pack(padx=20, pady=20)
-
-
-# Zone de texte
-# text_area = tk.Text(main_window, wrap=tk.WORD, width=40, height=10)
-# text_area.pack(padx=20, pady=20)
-
-# classification_var = tk.StringVar()
-# classification_var.set("-1")
-
-# classification_combo = ttk.Combobox(main_window, textvariable=classification_var, values=["-1", "0", "2", "4"])
-# classification_combo.pack(padx=10, pady=10)
 
 # Bouton d'analyser des tweets
 bouton_analyser_tweets = tk.Button(main_window, text="Analyser les tweets", command=analyser_tweets, state="disabled")
 bouton_analyser_tweets.pack()
 
+# Espace
 espace_entre_boutons = tk.Label(main_window, text="", height=1)
 espace_entre_boutons.pack()
 
@@ -161,11 +137,9 @@ resultat.pack(padx=20, pady=20)
 
 selection_algo.bind("<<ComboboxSelected>>", on_selection)
 
-
 # Créez une Listbox pour afficher les deux éléments de chaque sous-liste
 listbox = tk.Listbox(main_window, width=100)
 listbox.pack()
-
 
 # Créez une liste déroulante (combobox) pour les choix possibles de notes
 choices = [-1, 0, 2, 4]
