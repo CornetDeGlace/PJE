@@ -51,6 +51,8 @@ def nettoyage(commentaire):
     commentaire_nettoye = re.sub(r'([0-9]{1,2}\%)', 'XX%', commentaire_nettoye)
     # #5, Replace all links with void chain
     commentaire_nettoye = re.sub(r'https?://\S+|www\.\S+', '', commentaire_nettoye)
+    print("nettoyage")
+    print(commentaire_nettoye)
     return commentaire_nettoye
 
 def on_selection(event):
@@ -73,7 +75,8 @@ def analyser_tweets():
     if algo_name == "Dictionnaire":
         # Appeler la fonction de l'algorithme de Dictionnaire
         dictionnaire = Dictionnaire.Dictionnaire()
-        dictionnaire.analyser_tweets()
+        liste_test_file_dictionnaire = [tweet[:4] + [nettoyage(tweet[5])] + tweet[:6] for tweet in liste_test_file]
+        liste_test_analyse = dictionnaire.analyser_tweets(liste_test_file_dictionnaire)
     elif algo_name == "KNN":
         # Appeler la fonction de l'algorithme de KNN
         knn = KNN.KNN()
