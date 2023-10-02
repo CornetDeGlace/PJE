@@ -22,19 +22,27 @@ def convert_csv_to_list(liste_a_modifier):
                 liste_a_modifier.append(line)
     if liste_a_modifier != []:
         bouton_analyser_tweets.config(state="normal")
+
         # Activer le bouton "Sauvegarder"
         bouton_sauvegarder.config(state="normal")  
-        afficher_tweets_importes(liste_test_file, listbox)
+    
+def convert_csv_test_to_list(liste_test_file):
+    file = filedialog.askopenfilename(filetypes=[("Fichiers CSV", "*.csv")])
+    if file:
+        with open(file, 'r', newline='') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            for line in csv_reader:
+                liste_test_file.append(line)
+    if liste_test_file != []:
+        bouton_analyser_tweets.config(state="normal")
+
+        # Activer le bouton "Sauvegarder"
+        bouton_sauvegarder.config(state="normal")  
+        liste_test_analyse = [[-1] + sous_liste[1:] for sous_liste in liste_test_file]
+        afficher_tweets_importes(liste_test_file, liste_test_analyse, listbox)
 
     # print(liste_test_file)
     
-    
-
-#Cette fonction sert à quiter l'application 
-def quit():
-    main_window.destroy()
-
-
 main_window = tk.Tk()
 main_window.title("Twitter Sentiments Analysis App")
 main_window.geometry("600x600")
@@ -57,11 +65,11 @@ espace_entre_boutons = tk.Label(main_window, text="", height=1)
 espace_entre_boutons.pack()
 
 # Bouton d'import du fichier test
-bouton_import_test = tk.Button(main_window, text="Importer fichier de test", command=lambda: convert_csv_to_list(liste_test_file))
+bouton_import_test = tk.Button(main_window, text="Importer fichier de test", command=lambda: convert_csv_test_to_list(liste_test_file))
 bouton_import_test.pack(padx=20, pady=20)
 
 # Bouton d'analyser des tweets
-bouton_analyser_tweets = tk.Button(main_window, text="Analyser les tweets", command=lambda: analyser_tweets(selection_algo, liste_test_file), state="disabled")
+bouton_analyser_tweets = tk.Button(main_window, text="Analyser les tweets", command=lambda: analyser_tweets(selection_algo, liste_test_file, liste_test_analyse, listbox), state="disabled")
 bouton_analyser_tweets.pack()
 
 # Espace
@@ -72,7 +80,7 @@ espace_entre_boutons.pack()
 # resultat = tk.Label(main_window, text="Résultat : RIEN POUR L'INSTANT")
 # resultat.pack(padx=20, pady=20)
 
-selection_algo.bind("<<ComboboxSelected>>", command=lambda: on_selection(selection_algo, description_algo))
+selection_algo.bind("<<ComboboxSelected>>", lambda event, combo=selection_algo: on_selection(combo, description_algo))
 
 # Créez une Listbox pour afficher les deux éléments de chaque sous-liste
 listbox = tk.Listbox(main_window, width=100)

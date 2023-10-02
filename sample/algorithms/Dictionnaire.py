@@ -9,7 +9,6 @@ class Dictionnaire:
         liste_test_analyse = []
         for tweet in liste_test_file:
             for mot in tweet[5].split():
-                print(mot)
                 if mot in self.positive_list:
                     compteur_positive += 1
                 elif mot in self.negative_list:
@@ -22,6 +21,7 @@ class Dictionnaire:
                 liste_test_analyse.append(["2"] + tweet[1:])
             compteur_positive = 0
             compteur_negative = 0
+        print(liste_test_analyse)
         return liste_test_analyse
 
     def mots_depuis_fichier(self, nom_fichier):
