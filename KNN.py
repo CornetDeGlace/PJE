@@ -21,8 +21,10 @@ class KNN:
         for mot in t1_list:
             if (mot in t2_list) and (mot not in historique):
                 nombre_de_mots_en_commun += 1
-                print(mot)
             historique.append(mot)
+
+        print(nombre_de_mots_en_commun)
+        print(nombre_total_de_mots)
             
         return ( (nombre_total_de_mots - nombre_de_mots_en_commun) / nombre_total_de_mots )
 
@@ -32,5 +34,7 @@ class KNN:
 
 if __name__ == "__main__":
     knn = KNN()
-    knn.distance("bla bla blabla", "blu bla blabla")
+    print(knn.distance("bla bla blabla", "blu bla blabla"))
+    print(knn.distance("bkuvlab grub", "blab grib"))
+
 
