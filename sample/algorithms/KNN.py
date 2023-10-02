@@ -1,3 +1,5 @@
+from Algorithm import Algorithm
+
 class KNN:
     def __init__(self):
         pass
@@ -9,24 +11,14 @@ class KNN:
     def distance(self, t1, t2):
         t1_list = t1.split()
         t2_list = t2.split()
-
-        t1_len = len(t1_list)
-        t2_len = len(t2_list)
-
-        nombre_total_de_mots = t1_len + t2_len
-        nombre_de_mots_en_commun = 0
-
-        historique = []
-
-        for mot in t1_list:
-            if (mot in t2_list) and (mot not in historique):
-                nombre_de_mots_en_commun += 1
-            historique.append(mot)
-
-        print(nombre_de_mots_en_commun)
-        print(nombre_total_de_mots)
-            
-        return ( (nombre_total_de_mots - nombre_de_mots_en_commun) / nombre_total_de_mots )
+        total_words_number = len(t1_list) + len(t2_list)
+        common_words_number = 0
+        history = set()
+        for word in t1_list:
+            if (word in t2_list) and (word not in history):
+                common_words_number += 1
+            history.add(word)    
+        return ((total_words_number - common_words_number) / total_words_number)
 
     
 
@@ -34,7 +26,7 @@ class KNN:
 
 if __name__ == "__main__":
     knn = KNN()
-    print(knn.distance("bla bla blabla", "blu bla blabla"))
+    print(knn.distance("bla bla test", "bla culk"))
     print(knn.distance("bkuvlab grub", "blab grib"))
 
 

@@ -1,4 +1,6 @@
-class Bayes:
+from Algorithm import Algorithm
+
+class Bayes(Algorithm):
     def __init__(self):
         pass
 
