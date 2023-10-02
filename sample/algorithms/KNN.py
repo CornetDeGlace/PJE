@@ -1,4 +1,5 @@
 from Algorithm import Algorithm
+from collections import OrderedDict
 
 class KNN(Algorithm):
     def __init__(self):
@@ -6,18 +7,22 @@ class KNN(Algorithm):
     
     # sans réutilisation des tests déjà labélisés
     # sans pondération de la distance
+    # TODO : fonction de pondération 
     def analyser_tweets(self, test_list, learning_list, neighbours_number):
-        neighbours = {} # tweet : distance
-        for word in test_list:
+        res = test_list.copy()
+        neighbours = OrderedDict() # polarité : distance
+        for tweet in test_list:
             for labeled_data in learning_list:
-                distance = self.distance(word, labeled_data)
+                distance = self.distance(tweet[5], labeled_data[5])
                 if neighbours and len(neighbours.keys()) >= neighbours_number:
-                    worst_neighbour = min(neighbours, key=lambda k: neighbours[k])
+                    worst_neighbour = neighbours.keys()[-1]
                     if distance < neighbours[worst_neighbour]:
                         neighbours.pop(worst_neighbour)
-                        neighbours[word] = distance
+                        neighbours[labeled_data[0]] = distance
                 else :
-                    neighbours[word] = distance
+                    neighbours[labeled_data[0]] = distance
+            tweet[0] = max(neighbours.keys(), lambda neighbour: neighbour[0])
+        return res
 
     # t1 = "bla bla blabla" t2 = "blu bla blabla"
     # private
