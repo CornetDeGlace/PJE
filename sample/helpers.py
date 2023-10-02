@@ -1,6 +1,14 @@
 import csv 
 from tkinter import filedialog
 import tkinter as tk
+import re 
+from algorithms import Dictionnaire, KNN, Bayes
+
+algorithmes = [
+    {"name": "Dictionnaire", "description": "Algorithme Dictionnaire"},
+    {"name": "KNN", "description": "Algorithme KNN"},
+    {"name": "Bayes", "description": "Algorithme Bayes"}
+]
 
 #Cette fonction sauvegarde les tweets nettoyés
 def sauvegarder_textes_nettoyes():
@@ -22,7 +30,7 @@ def nettoyage(commentaire):
     return commentaire_nettoye
 
 #Cette fonction décrit l'algorihtme utilisé
-def on_selection(event):
+def on_selection(event, selection_algo, description_algo):
     algo_name = selection_algo.get()
     for algo in algorithmes:
         if algo["name"] == algo_name:
@@ -34,7 +42,7 @@ def afficher_tweets_importes(liste_test_file, listbox):
         listbox.insert(tk.END, f"{item[0]} -> {item[5]}")
 
 
-def analyser_tweets():
+def analyser_tweets(selection_algo, liste_test_file):
     # Récupérer le nom de l'algorithme sélectionné
     algo_name = selection_algo.get()
     

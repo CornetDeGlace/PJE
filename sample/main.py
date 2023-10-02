@@ -7,12 +7,6 @@ from algorithms import KNN
 from algorithms import Bayes
 from helpers import *
 
-algorithmes = [
-    {"name": "Dictionnaire", "description": "Algorithme Dictionnaire"},
-    {"name": "KNN", "description": "Algorithme KNN"},
-    {"name": "Bayes", "description": "Algorithme Bayes"}
-]
-
 
 liste_apprentissage = []
 liste_test_file = []
@@ -67,7 +61,7 @@ bouton_import_test = tk.Button(main_window, text="Importer fichier de test", com
 bouton_import_test.pack(padx=20, pady=20)
 
 # Bouton d'analyser des tweets
-bouton_analyser_tweets = tk.Button(main_window, text="Analyser les tweets", command=analyser_tweets, state="disabled")
+bouton_analyser_tweets = tk.Button(main_window, text="Analyser les tweets", command=lambda: analyser_tweets(selection_algo, liste_test_file), state="disabled")
 bouton_analyser_tweets.pack()
 
 # Espace
@@ -78,7 +72,7 @@ espace_entre_boutons.pack()
 # resultat = tk.Label(main_window, text="Résultat : RIEN POUR L'INSTANT")
 # resultat.pack(padx=20, pady=20)
 
-selection_algo.bind("<<ComboboxSelected>>", on_selection)
+selection_algo.bind("<<ComboboxSelected>>", command=lambda: on_selection(selection_algo, description_algo))
 
 # Créez une Listbox pour afficher les deux éléments de chaque sous-liste
 listbox = tk.Listbox(main_window, width=100)
