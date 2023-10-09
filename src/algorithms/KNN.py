@@ -28,7 +28,7 @@ class KNN(Algorithm):
     # sans réutilisation des tests déjà labélisés
     # sans pondération de la distance
     # TODO : fonction de pondération 
-    def analyser_tweets(self, test_list, learning_list, neighbours_number):
+    def analyser_tweets(self, test_list, learning_list, neighbours_number, ponderation_function = lambda neighbour, distance : neighbour[0]):
         res = test_list.copy()
         neighbours = OrderedDict() # polarité : distance
         for tweet in test_list:
