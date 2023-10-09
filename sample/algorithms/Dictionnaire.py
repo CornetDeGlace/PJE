@@ -1,4 +1,6 @@
-class Dictionnaire:
+from Algorithm import Algorithm
+
+class Dictionnaire(Algorithm):
     def __init__(self):
         self.negative_list = self.mots_depuis_fichier("data/negative.txt")
         self.positive_list = self.mots_depuis_fichier("data/positive.txt")
