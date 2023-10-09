@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from Algorithm import Algorithm
+=======
+from src.algorithms.Algorithm import Algorithm
+>>>>>>> Dictionnaire
 
 class Bayes(Algorithm):
     def __init__(self):

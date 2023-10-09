@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from Algorithm import Algorithm
-=======
 from src.algorithms.Algorithm import Algorithm
->>>>>>> Dictionnaire
 
 class Dictionnary(Algorithm):
 

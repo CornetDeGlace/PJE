@@ -3,8 +3,13 @@ from tkinter import ttk
 import csv
 import re
 from src.algorithms import Dictionnary
+<<<<<<< HEAD
 from algorithms import KNN
 from algorithms import Bayes
+=======
+from src.algorithms import KNN
+from src.algorithms import Bayes
+>>>>>>> Dictionnaire
 from helpers import *
 
 

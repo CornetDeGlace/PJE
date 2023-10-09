@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 import csv 
 from tkinter import filedialog
 import tkinter as tk
 import re 
 from algorithms import Dictionnaire, KNN, Bayes
+=======
+
+import tkinter as tk
+import re 
+from src.algorithms import Dictionnary, KNN, Bayes
+>>>>>>> Dictionnaire
 
 algorithmes = [
     {"name": "Dictionnaire", "description": "Algorithme Dictionnaire"},
@@ -11,6 +18,7 @@ algorithmes = [
 ]
 
 #Cette fonction sauvegarde les tweets nettoyés
+<<<<<<< HEAD
 def sauvegarder_textes_nettoyes():
     # Récupérer les textes nettoyés de la liste d'apprentissage
     textes_nettoyes = [nettoyage(ligne[5]) for ligne in liste_apprentissage]
@@ -18,6 +26,15 @@ def sauvegarder_textes_nettoyes():
     with open("textes_nettoyes.txt", "w", encoding="utf-8") as fichier:
         for texte in textes_nettoyes:
             fichier.write(texte + "\n")
+=======
+# def sauvegarder_textes_nettoyes():
+#     # Récupérer les textes nettoyés de la liste d'apprentissage
+#     textes_nettoyes = [nettoyage(ligne[5]) for ligne in liste_apprentissage]
+#     # Écrire les textes nettoyés dans un fichier texte
+#     with open("textes_nettoyes.txt", "w", encoding="utf-8") as fichier:
+#         for texte in textes_nettoyes:
+#             fichier.write(texte + "\n")
+>>>>>>> Dictionnaire
 
 
 #Cette fonction nettoie les tweets
@@ -37,12 +54,22 @@ def on_selection(event, selection_algo, description_algo):
             description_algo.config(text=algo["description"])
 
 #Cette fonction affiche les tweets importés sur le GUI
+<<<<<<< HEAD
 def afficher_tweets_importes(liste_test_file, listbox):
     for item in liste_test_file:
         listbox.insert(tk.END, f"{item[0]} -> {item[5]}")
 
 
 def analyser_tweets(selection_algo, liste_test_file):
+=======
+def afficher_tweets_importes(liste_test_file, liste_test_analyse, listbox):
+    listbox.delete(0, tk.END)
+    for item_test, item_analyse in zip(liste_test_file, liste_test_analyse):
+        listbox.insert(tk.END, f" T : {item_test[0]} A : {item_analyse[0]} -> {item_test[5]}")
+
+
+def analyser_tweets(selection_algo, liste_test_file, liste_test_analyse, listbox):
+>>>>>>> Dictionnaire
     # Récupérer le nom de l'algorithme sélectionné
     algo_name = selection_algo.get()
     
@@ -54,6 +81,10 @@ def analyser_tweets(selection_algo, liste_test_file):
         dictionnaire = Dictionnaire.Dictionnaire()
         liste_test_file_dictionnaire = [tweet[:5] + [nettoyage(tweet[5])] + tweet[5:5] for tweet in liste_test_file]
         liste_test_analyse = dictionnaire.analyser_tweets(liste_test_file_dictionnaire)
+<<<<<<< HEAD
+=======
+        afficher_tweets_importes(liste_test_file, liste_test_analyse, listbox)
+>>>>>>> Dictionnaire
 
         # print("résultat : ")
         # print(liste_test_analyse)
