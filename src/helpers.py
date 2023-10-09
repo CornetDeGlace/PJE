@@ -2,12 +2,8 @@ import csv
 from tkinter import filedialog
 import tkinter as tk
 import re 
-<<<<<<< HEAD
-from algorithms import KNN, Bayes
-from src.algorithms import Dictionnary
-=======
 from src.algorithms import Dictionnary, KNN, Bayes
->>>>>>> Dictionnaire
+
 
 algorithmes = [
     {"name": "Dictionnaire", "description": "Algorithme Dictionnaire"},
@@ -56,11 +52,7 @@ def analyser_tweets(selection_algo, liste_test_file):
     
     if algo_name == "Dictionnaire":
         # Appeler la fonction de l'algorithme de Dictionnaire
-<<<<<<< HEAD
         dictionnaire = Dictionnary.Dictionnaire()
-=======
-        dictionnaire = Dictionnaire.Dictionnaire()
->>>>>>> Dictionnaire
         liste_test_file_dictionnaire = [tweet[:5] + [nettoyage(tweet[5])] + tweet[5:5] for tweet in liste_test_file]
         liste_test_analyse = dictionnaire.analyser_tweets(liste_test_file_dictionnaire)
 
