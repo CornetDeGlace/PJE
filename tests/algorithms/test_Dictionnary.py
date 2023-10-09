@@ -1,5 +1,5 @@
 
-from algorithms.Dictionnary import Dictionnary
+from src.algorithms.Dictionnary import Dictionnary
 
 class Test_Dictionnary():
 
