@@ -7,4 +7,7 @@ class Test_KNN():
         self.KNN = KNN()
 
     def test_distance(self):
-        assert KNN.distance("bla bleu bli", "blo bleu") == 0.4
+        assert KNN.distance("bla bleu bli", "blo bleu") == 0.8
+    
+    def jaccard_distance(self):
+        assert KNN.jaccard_distance("bla bleu bli", "blo bleu") == 0.8
