@@ -1,1 +1,7 @@
 __pychache__/*
+
+.idea/*
+
+build/*
+
+package.egg-info/*
