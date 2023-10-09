@@ -32,7 +32,7 @@ class KNN(Algorithm):
     # sans pondération de la distance
     # TODO : fonction de pondération 
     # method neighbour => prend en paramètre un neighbor, et renvoie sa classe multipliée par une pondération (par défaut 1). On peut imaginer multiplier par sa distance par exemple.
-    def analyser_tweets(self, test_list, learning_list, neighbours_number, ponderation_fonction = lambda neighbour : neighbour[0]):
+    def analyser_tweets(self, test_list, learning_list, neighbours_number, ponderation_fonction = lambda neighbour, distance: neighbour[0]):
         res = test_list.copy()
         neighbours = OrderedDict() # polarité : distance
         for tweet in test_list:
@@ -45,7 +45,7 @@ class KNN(Algorithm):
                         neighbours[labeled_data[0]] = distance
                 else :
                     neighbours[labeled_data[0]] = distance
-            tweet[0] = max(neighbours.keys(), lambda neighbour: ponderation_fonction(neighbour))
+            tweet[0] = max(neighbours.keys(), lambda neighbour: ponderation_fonction(neighbour, distance))
         return res
 
     
