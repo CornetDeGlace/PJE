@@ -1,0 +1,15 @@
+README.md
+setup.py
+package.egg-info/PKG-INFO
+package.egg-info/SOURCES.txt
+package.egg-info/dependency_links.txt
+package.egg-info/top_level.txt
+sample/__init__.py
+sample/algorithms/Algorithm.py
+sample/algorithms/Bayes.py
+sample/algorithms/Dictionnaire.py
+sample/algorithms/KNN.py
+sample/algorithms/__init__.py
+sample/view/__init__.py
+sample/view/core.py
+sample/view/ui.py

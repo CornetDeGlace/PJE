@@ -1,7 +1,11 @@
 
 import tkinter as tk
 import re 
-from algorithms import Dictionnaire, KNN, Bayes
+from sample.algorithms.Dictionnaire import Dictionnaire
+from sample.algorithms.KNN import KNN
+from sample.algorithms.Bayes import Bayes
+
+
 
 algorithmes = [
     {"name": "Dictionnaire", "description": "Algorithme Dictionnaire"},

@@ -1,11 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 import csv
-import re
-from algorithms import Dictionnaire
-from algorithms import KNN
-from algorithms import Bayes
-from helpers import *
+from tkinter import filedialog
+from core import *
 
 
 liste_apprentissage = []
@@ -24,7 +21,7 @@ def convert_csv_to_list(liste_a_modifier):
         bouton_analyser_tweets.config(state="normal")
 
         # Activer le bouton "Sauvegarder"
-        bouton_sauvegarder.config(state="normal")  
+        # bouton_sauvegarder.config(state="normal")  
     
 def convert_csv_test_to_list(liste_test_file):
     file = filedialog.askopenfilename(filetypes=[("Fichiers CSV", "*.csv")])
@@ -37,7 +34,7 @@ def convert_csv_test_to_list(liste_test_file):
         bouton_analyser_tweets.config(state="normal")
 
         # Activer le bouton "Sauvegarder"
-        bouton_sauvegarder.config(state="normal")  
+        # bouton_sauvegarder.config(state="normal")  
         liste_test_analyse = [[-1] + sous_liste[1:] for sous_liste in liste_test_file]
         afficher_tweets_importes(liste_test_file, liste_test_analyse, listbox)
 
@@ -111,7 +108,7 @@ espace_entre_boutons = tk.Label(main_window, text="", height=1)
 espace_entre_boutons.pack()
 
 # Bouton "Sauvegarder" pour sauvegarder les textes nettoyés
-bouton_sauvegarder = tk.Button(main_window, text="Sauvegarder", state="disabled", command=sauvegarder_textes_nettoyes)
-bouton_sauvegarder.pack()
+# bouton_sauvegarder = tk.Button(main_window, text="Sauvegarder", state="disabled", command=sauvegarder_textes_nettoyes)
+# bouton_sauvegarder.pack()
 
 main_window.mainloop()
