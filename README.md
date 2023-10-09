@@ -6,18 +6,11 @@
 ## Structure d'un Tweet
 
 | Index | Part |
-|-------|-----------|
-<<<<<<< HEAD
-| 0     | Class          |
-| 1     | Id          |
-| 2     | Date          |
-| 3     | ?          |
-=======
+|-------|-----------|    
 | 0     | Target          |
 | 1     | Id          |
 | 2     | Date          |
 | 3     | Flag          |
->>>>>>> Dictionnaire
 | 4     | Author          |
 | 5     | Content          |
 
