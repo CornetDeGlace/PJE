@@ -28,6 +28,7 @@ def nettoyage(commentaire):
     commentaire_nettoye = re.sub(r'(\$ ?\d+\.\d+)', '$XX', commentaire_nettoye)
     commentaire_nettoye = re.sub(r'([0-9]{1,2}\%)', 'XX%', commentaire_nettoye)
     commentaire_nettoye = re.sub(r'https?://\S+|www\.\S+', '', commentaire_nettoye)
+    commentaire_nettoye = commentaire_nettoye.replace(',', '')
     return commentaire_nettoye
 
 #Cette fonction décrit l'algorihtme utilisé

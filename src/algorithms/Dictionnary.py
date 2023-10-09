@@ -18,44 +18,27 @@ class Dictionnary(Algorithm):
         self.positive_list = Dictionnary.read_words_from_file("data/positive.txt")
 
     def analyser_tweets(self, liste_test_file):
-        count = 0
         liste_test_analyse = []
         for tweet in liste_test_file:
-            for mot in tweet[5].split():
-                if mot in self.positive_list:
-                    count += 1
-                elif mot in self.negative_list:
-                    count -= 1
-            if count > 0:
-                label = "4"
-            elif count < 0:
-                label = "0"
-            else:
-                label = "2"
-            liste_test_analyse.append([label] + tweet[1:])
-            count = 0
+            liste_test_analyse.append([self.analyze_tweet(tweet)] + tweet[1:])
         return liste_test_analyse
     
-    def analyser_tweets(self, liste_test_file):
-        count = 0
-        liste_test_analyse = []
-        for tweet in liste_test_file:
-            i = 0
-            tmp = 0
-            words = tweet[5].split()
-            for i in range (len(words)):
-                if words[i:i+tmp] in self.positive_list:
-                    count += 1
-                elif words[i:i+tmp] in self.negative_list:
-                    count -= 1
-                else:
-                    pass
+    def analyze_tweet_content(self, tweet_content):
+            count = self.count_positive_negative_words(tweet_content)
             if count > 0:
                 label = "4"
             elif count < 0:
                 label = "0"
             else:
                 label = "2"
-            liste_test_analyse.append([label] + tweet[1:])
-            count = 0
-        return liste_test_analyse
+            return label 
+    
+    def count_positive_negative_words(self, words):
+        count = 0
+        for word in words.split():
+                if word in self.positive_list:
+                    count += 1
+                elif word in self.negative_list:
+                    count -= 1
+        return count
+    
