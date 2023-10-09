@@ -1,4 +1,4 @@
-from Algorithm import Algorithm
+from algorithms.Algorithm import Algorithm
 from collections import OrderedDict
 
 class KNN(Algorithm):

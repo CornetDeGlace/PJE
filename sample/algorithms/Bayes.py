@@ -1,4 +1,4 @@
-from Algorithm import Algorithm
+from algorithms.Algorithm import Algorithm
 
 class Bayes(Algorithm):
     def __init__(self):

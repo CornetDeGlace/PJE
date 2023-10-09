@@ -1,4 +1,4 @@
-from Algorithm import Algorithm
+from algorithms.Algorithm import Algorithm
 
 class Dictionnaire(Algorithm):
     def __init__(self):
